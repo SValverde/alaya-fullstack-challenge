@@ -11,6 +11,7 @@ import {
   createStyles,
 } from '@material-ui/core';
 
+// TODO Reuse login/signup styles
 const useStyles = makeStyles((theme) =>
   createStyles({
     form: {
