@@ -17,7 +17,6 @@ const UserReducer = (state = initialState, action) => {
   console.log({ state, action });
   switch (action.type) {
     case USER_ACTIONS.LOGIN:
-      console.log("I'm doing a login action")
       return {
         _id: action.user._id,
         email: action.user.email,
