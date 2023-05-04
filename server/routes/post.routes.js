@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const secureRoute = require('../middlewares/auth');
 const PostController = require('../controllers/post.controller');
 
 // Get all Posts
@@ -9,9 +10,9 @@ router.route('/posts').get(PostController.getPosts);
 router.route('/posts/:cuid').get(PostController.getPost);
 
 // Add a new Post
-router.route('/posts').post(PostController.addPost);
+router.route('/posts').post(secureRoute, PostController.addPost);
 
 // Delete a post by cuid
-router.route('/posts/:cuid').delete(PostController.deletePost);
+router.route('/posts/:cuid').delete(secureRoute, PostController.deletePost);
 
 module.exports = router;

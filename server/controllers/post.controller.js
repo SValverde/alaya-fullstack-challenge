@@ -35,6 +35,7 @@ addPost = async (req, res) => {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
+  newPost.author = req.user._id;
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
@@ -68,14 +69,23 @@ getPost = async (req, res) => {
  * @returns void
  */
 deletePost = async (req, res) => {
-  Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
+  Post.findOne({ cuid: req.params.cuid}).exec((err, post) => {
+
     if (err) {
       res.status(500).send(err);
     }
+    else if(!post){
+      res.status(404).send('Not found');
+    }
+    else if(post.author != req.user._id){
+      res.status(401).send('Unauthorized');
+    }
+    else{
+      post.remove(() => {
+        res.status(200).end();
+      });
+    }
 
-    post.remove(() => {
-      res.status(200).end();
-    });
   });
 };
 
