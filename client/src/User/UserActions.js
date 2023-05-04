@@ -5,9 +5,10 @@ export const JWT_TOKEN = 'jwtToken';
 // Action types
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
+const LOAD_USER = 'LOAD_USER'
 
 // Export Constants
-export const USER_ACTIONS = { LOGIN, LOGOUT };
+export const USER_ACTIONS = { LOGIN, LOGOUT, LOAD_USER };
 
 // Export Actions
 export function setUser(data) {
@@ -20,6 +21,12 @@ export function setUser(data) {
 export function removeUser(){
   return {
     type: LOGOUT
+  }
+}
+
+export function loadUser(){
+  return{
+    type: LOAD_USER
   }
 }
 

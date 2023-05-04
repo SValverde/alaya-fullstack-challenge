@@ -36,7 +36,7 @@ function App(props) {
                                 {/* TODO prevent signup and login navigation when user is already signed in */}
                                 <Route path="/signup" exact component={SignUp} />
                                 <Route path="/login" exact component={Login} />
-                                
+
                                 <Route path="/posts/:cuid/:slug" exact component={PostDetailPage} />
                             </Switch>
                         </BrowserRouter>

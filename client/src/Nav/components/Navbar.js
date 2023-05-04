@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -6,13 +6,17 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { useSelector, useDispatch } from "react-redux";
 import { getEmail } from "../../User/UserReducer";
-import { userLogout } from '../../User/UserActions';
-
+import { loadUser, userLogout } from '../../User/UserActions';
 
 function Navbar() {
 
     const userEmail = useSelector(getEmail);
     const dispatch = useDispatch();
+
+    // TODO Probably should do this somewhere else
+    useEffect(() => {
+        dispatch(loadUser())
+    }, []);
 
     const AuthSection = () => {
         if (!userEmail) {
@@ -44,7 +48,7 @@ function Navbar() {
                 </Typography>
 
                 <div className='d-flex'>
-                    <AuthSection/>
+                    <AuthSection />
                 </div>
             </Toolbar>
         </AppBar>
