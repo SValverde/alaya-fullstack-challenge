@@ -2,6 +2,7 @@ const Post = require('../models/post');
 const cuid = require('cuid');
 const slug = require('limax');
 const sanitizeHtml = require('sanitize-html');
+const { attachImages } = require('../middleware/fileupload');
 
 /**
  * Get all posts
@@ -24,17 +25,19 @@ getPosts = async (req, res) => {
  * @param res
  * @returns void
  */
+// TODO attach files after creating the post so that we can prepend the post id to the file and avoid conflicts.
 addPost = async (req, res) => {
-  if (!req.body.post.name || !req.body.post.title || !req.body.post.content) {
+  if (!req.body.name || !req.body.title || !req.body.content) {
     res.status(403).end();
   }
 
-  const newPost = new Post(req.body.post);
+  const newPost = new Post(req.body);
 
   // Let's sanitize inputs
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
+  newPost.image = req.file.path;
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
