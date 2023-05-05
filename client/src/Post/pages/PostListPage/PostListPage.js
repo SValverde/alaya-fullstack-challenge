@@ -13,6 +13,8 @@ const PostListPage = ({ showAddPost }) => {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.posts.data);
 
+  console.log("posts:",posts);
+
   useEffect(() => {
     dispatch(fetchPosts());
   },[]);

@@ -21,3 +21,27 @@ export default async (endpoint, method = 'get', body) => {
     error => error
   );
 }
+
+export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
+  const formData = new FormData();
+  for ( var key in jsonBody ) {
+    formData.append(key, jsonBody[key]);
+  }
+  return fetch(`${API_URL}/${endpoint}`, {
+    method,
+    body: formData
+  })
+  .then(response => response.json().then(json => ({ json, response })))
+  .then(({ json, response }) => {
+    if (!response.ok) {
+      return Promise.reject(json);
+    }
+
+    console.log("Json response:",json);
+    return json;
+  })
+  .then(
+    response => response,
+    error => error
+  );
+}

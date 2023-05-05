@@ -1,4 +1,4 @@
-import callApi from '../util/apiCaller';
+import callApi, { multiPartCall } from '../util/apiCaller';
 
 // Export Constants
 export const ADD_POST = 'ADD_POST';
@@ -15,13 +15,8 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return (dispatch) => {
-    return callApi('posts', 'post', {
-      post: {
-        name: post.name,
-        title: post.title,
-        content: post.content,
-      },
-    }).then(res => dispatch(addPost(res.post)));
+    return multiPartCall('posts', 'post', { post })
+      .then(res => dispatch(addPost(res.post)));
   };
 }
 

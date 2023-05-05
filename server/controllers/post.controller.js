@@ -70,6 +70,7 @@ getPost = async (req, res) => {
  * @param res
  * @returns void
  */
+// TODO delete img from cloudinary if the post has an imageUrl
 deletePost = async (req, res) => {
   Post.findOne({ cuid: req.params.cuid }).exec((err, post) => {
     if (err) {

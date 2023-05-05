@@ -16,6 +16,7 @@ function PostListItem({ post, onDelete }) {
             {post.title}
           </Link>
         </Typography>
+        <img src={post.image}/>
         <Typography component="p" className="mt-3">
           {post.content}
         </Typography>
