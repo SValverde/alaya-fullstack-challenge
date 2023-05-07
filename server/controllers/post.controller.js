@@ -37,7 +37,7 @@ addPost = async (req, res) => {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
-  newPost.image = req.file.path;
+  if (req.file) newPost.image = req.file.path;
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
