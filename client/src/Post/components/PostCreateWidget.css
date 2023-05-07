@@ -1,0 +1,45 @@
+.widget-root .MuiFormControl-root {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.widget-root .MuiFormControl-root .MuiInputBase-root {
+    border-radius: 0;
+}
+
+.widget-root .MuiFormControl-root .MuiInputBase-root {
+    background-color: white;
+}
+.widget-root .MuiFormControl-root .MuiInputBase-root fieldset {
+    border-bottom: 0px;
+}
+
+.widget-root .MuiFormControl-root:first-of-type .MuiInputBase-root {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.widget-root .post-control-wrapper{
+    background-color: white;
+    border:1px solid rgba(0,0,0,.2);
+    border-bottom: none;
+    color: #305252;
+}
+.widget-root .post-control-wrapper label{
+    cursor: pointer;
+}
+
+.widget-root .remove-file{
+    cursor: pointer;
+    margin-bottom: 2px;
+}
+
+/* .widget-root .MuiFormControl-root:last-of-type .MuiInputBase-root {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+} */
+
+.widget-root .MuiButtonBase-root{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

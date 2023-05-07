@@ -7,7 +7,7 @@ import PostListItem from './PostListItem';
 function PostList(props) {
   return (
     <div className="d-flex flex-column w-100">
-      <h3 className="mt-4">Posts</h3>
+      <h3 className="mt-2 mb-3">What's new?</h3>
       {
         props.posts?.map(post => (
           <PostListItem

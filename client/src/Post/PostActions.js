@@ -15,7 +15,7 @@ export function addPost(post) {
 
 export function addPostRequest(post) {
   return (dispatch) => {
-    return multiPartCall('posts', 'post', { post })
+    return multiPartCall('posts', 'post', post )
       .then(res => dispatch(addPost(res.post)));
   };
 }

@@ -8,12 +8,13 @@ import PostDetailPage from './Post/pages/PostDetailPage/PostDetailPage';
 import { Provider } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Nav/components/Navbar';
+import Navbar from './Nav/components/Navbar'; 
 
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#1ecde2',
+            // main: '#1ecde2',
+            main: '#305252',
         },
     },
 });
@@ -23,7 +24,7 @@ function App(props) {
       <ThemeProvider theme={theme}>
           <div className="w-100">
               <Navbar />
-              <div className="w-100 pt-5 mt-5">
+              <div className="w-100 pt-5">
                   <Provider store={props.store}>
                     <BrowserRouter>
                       <Switch>

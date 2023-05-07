@@ -23,6 +23,7 @@ export default async (endpoint, method = 'get', body) => {
 }
 
 export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
+  console.log("Jsonbody:",jsonBody);
   const formData = new FormData();
   for ( var key in jsonBody ) {
     formData.append(key, jsonBody[key]);

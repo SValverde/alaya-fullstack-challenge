@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import './PostCreateWidget.css';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import imageIcon from '../../assets/imgs/image-icon.png';
+import trashIcon from '../../assets/imgs/trash.png';
 import { makeStyles } from '@material-ui/core/styles';
 // Import Style
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
     },
   },
 }));
@@ -20,6 +23,7 @@ const PostCreateWidget = ({ addPost }) => {
 
   const submit = () => {
     if (state.name && state.title && state.content) {
+      console.log("State:",state);
       addPost(state);
     }
   };
@@ -39,14 +43,37 @@ const PostCreateWidget = ({ addPost }) => {
     })
   }
 
+  const clearFile = () => {
+    document.getElementById('post-image-file-select').value = null;
+    setState({
+      ...state,
+      image: null
+    })
+  }
+
   return (
-    <div className={`${classes.root} d-flex flex-column my-4 w-100`}>
-      <h3>Create new post</h3>
-      <TextField variant="filled" label="Author name" name="name" onChange={handleChange} />
-      <TextField variant="filled" label="Post title" name="title" onChange={handleChange} />
-      <TextField variant="filled" multiline rows="4" label="Post content" name="content" onChange={handleChange} />
-      <input type="file" onChange={handleFile}></input>
-      <Button className="mt-4" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content}>
+    <div className={`${classes.root} widget-root d-flex flex-column mb-4 w-100`}>
+      <h3 className="mb-3">What's up?</h3>
+
+      <div className="d-flex flex-column mt-2">
+        <TextField variant="outlined" label="Author name" name="name" onChange={handleChange} />
+        <TextField variant="outlined" label="Post title" name="title" onChange={handleChange} />
+        <TextField variant="outlined" multiline rows="4" label="Post content" name="content" onChange={handleChange} />
+      </div>
+
+      <div className="post-control-wrapper d-flex justify-content-between align-items-center p-2">
+        <label className="m-0" htmlFor="post-image-file-select">
+          <img width="26" src={imageIcon} />
+          <small className="ml-2">Attach file</small>
+        </label>
+        <input id="post-image-file-select" className="d-none" type="file" name="image" onChange={handleFile}></input>
+        {state.image 
+          &&
+          <small><span onClick={clearFile} className="remove-file"><img src={trashIcon} height="14" /></span>{state.image.name}</small>
+        }
+      </div>
+
+      <Button className="mt-0" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content}>
         Submit
       </Button>
     </div>
