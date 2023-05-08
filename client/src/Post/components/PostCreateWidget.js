@@ -18,13 +18,25 @@ const useStyles = makeStyles(theme => ({
 
 const PostCreateWidget = ({ addPost }) => {
 
-  const [state, setState] = useState({});
+  const [state, setState] = useState({name: '', title: '', content: '', image: null, loading: false});
   const classes = useStyles();
 
   const submit = () => {
     if (state.name && state.title && state.content) {
       console.log("State:",state);
-      addPost(state);
+      setState({
+        ...state,
+        loading: true
+      })
+      addPost(state).then(()=>{
+        setState({
+          name: '',
+          title: '',
+          content: '',
+          image: null,
+          loading: false
+        })
+      })
     }
   };
 
@@ -56,9 +68,9 @@ const PostCreateWidget = ({ addPost }) => {
       <h3 className="mb-3">What's up?</h3>
 
       <div className="d-flex flex-column mt-2">
-        <TextField variant="outlined" label="Author name" name="name" onChange={handleChange} />
-        <TextField variant="outlined" label="Post title" name="title" onChange={handleChange} />
-        <TextField variant="outlined" multiline rows="4" label="Post content" name="content" onChange={handleChange} />
+        <TextField variant="outlined" label="Author name" name="name" value={state.name} onChange={handleChange} />
+        <TextField variant="outlined" label="Post title" name="title" value={state.title} onChange={handleChange} />
+        <TextField variant="outlined" multiline rows="4" label="Post content" value={state.content} name="content" onChange={handleChange} />
       </div>
 
       <div className="post-control-wrapper d-flex justify-content-between align-items-center p-2">
@@ -73,8 +85,8 @@ const PostCreateWidget = ({ addPost }) => {
         }
       </div>
 
-      <Button className="mt-0" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content}>
-        Submit
+      <Button className="mt-0" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content || state.loading}>
+        {state.loading ? 'Loading...' : 'Submit'}
       </Button>
     </div>
   );
