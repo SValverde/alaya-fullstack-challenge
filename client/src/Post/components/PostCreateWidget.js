@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import imageIcon from '../../assets/imgs/image-icon.png';
 import trashIcon from '../../assets/imgs/trash.png';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
+import { getId } from '../../User/UserReducer';
 // Import Style
 
 const useStyles = makeStyles(theme => ({
@@ -18,17 +20,19 @@ const useStyles = makeStyles(theme => ({
 
 const PostCreateWidget = ({ addPost }) => {
 
-  const [state, setState] = useState({name: '', title: '', content: '', image: null, loading: false});
+  const [state, setState] = useState({ name: '', title: '', content: '', image: null, loading: false });
   const classes = useStyles();
+
+  const userId = useSelector(getId);
 
   const submit = () => {
     if (state.name && state.title && state.content) {
-      console.log("State:",state);
+      console.log("State:", state);
       setState({
         ...state,
         loading: true
       })
-      addPost(state).then(()=>{
+      addPost(state).then(() => {
         setState({
           name: '',
           title: '',
@@ -47,6 +51,18 @@ const PostCreateWidget = ({ addPost }) => {
       [evt.target.name]: value
     });
   };
+
+  const SubmitSection = () => {
+    if (userId) {
+      return (
+        <Button className="mt-0" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content || state.loading}>
+          {state.loading ? 'Loading...' : 'Submit'}
+        </Button>
+      )
+    } else {
+      return <div><a href="/login">Sign in</a> to create a post</div>
+    }
+  }
 
   const handleFile = (evt) => {
     setState({
@@ -79,15 +95,13 @@ const PostCreateWidget = ({ addPost }) => {
           <small className="ml-2">Attach file</small>
         </label>
         <input id="post-image-file-select" accept="image/*" className="d-none" type="file" name="image" onChange={handleFile}></input>
-        {state.image 
+        {state.image
           &&
           <small><span onClick={clearFile} className="remove-file"><img src={trashIcon} height="14" /></span>{state.image.name}</small>
         }
       </div>
+      <SubmitSection />
 
-      <Button className="mt-0" variant="contained" color="primary" onClick={() => submit()} disabled={!state.name || !state.title || !state.content || state.loading}>
-        {state.loading ? 'Loading...' : 'Submit'}
-      </Button>
     </div>
   );
 };

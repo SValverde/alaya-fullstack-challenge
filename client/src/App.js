@@ -8,7 +8,9 @@ import PostDetailPage from './Post/pages/PostDetailPage/PostDetailPage';
 import { Provider } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './Nav/components/Navbar'; 
+import Navbar from './Nav/components/Navbar';
+import SignUp from './User/pages/SignupPage/SignupPage';
+import Login from './User/pages/LoginPage/LoginPage';
 
 const theme = createMuiTheme({
     palette: {
@@ -20,23 +22,31 @@ const theme = createMuiTheme({
 });
 
 function App(props) {
-  return (
-      <ThemeProvider theme={theme}>
-          <div className="w-100">
-              <Navbar />
-              <div className="w-100 pt-5">
-                  <Provider store={props.store}>
-                    <BrowserRouter>
-                      <Switch>
-                          <Route path="/" exact component={PostListPage} />
-                          <Route path="/posts/:cuid/:slug" exact component={PostDetailPage} />
-                      </Switch>
-                    </BrowserRouter>
-                  </Provider>
-              </div>
-          </div>
-      </ThemeProvider>
-);
+    return (
+        <ThemeProvider theme={theme}>
+            <div className="w-100">
+                <Provider store={props.store}>
+                    {/* PersistGate after implementing redux-persist */}
+                    {/* <PersistGate loading={null} persistor={persistor}> */}
+                    <Navbar />
+                    <div className="w-100 pt-5">
+                        <BrowserRouter>
+                            <Switch>
+                                <Route path="/" exact component={PostListPage} />
+
+                                {/* TODO prevent signup and login navigation when user is already signed in */}
+                                <Route path="/signup" exact component={SignUp} />
+                                <Route path="/login" exact component={Login} />
+
+                                <Route path="/posts/:cuid/:slug" exact component={PostDetailPage} />
+                            </Switch>
+                        </BrowserRouter>
+                    </div>
+                    {/* </PersistGate> */}
+                </Provider>
+            </div>
+        </ThemeProvider >
+    );
 }
 
 App.propTypes = {

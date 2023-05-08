@@ -2,13 +2,21 @@ import React from 'react';
 import './PostListItem.css';
 import PropTypes from 'prop-types';
 import trashIcon from '../../assets/imgs/trash.png';
+import { getId } from '../../User/UserReducer';
+import { useSelector } from 'react-redux';
 
 function PostListItem({ post, onDelete }) {
+
+  const userId = useSelector(getId);
+
   return (
     <div className="my-card">
       <div className="d-flex justify-content-between">
         <h4 className="my-card-title mr-3">{post.title}</h4>
-        <div className="post-delete" onClick={onDelete}><img width="20" src={trashIcon}></img></div>
+        {
+          userId == post.author &&
+          <div className="post-delete" onClick={onDelete}><img width="20" src={trashIcon}></img></div>
+        }
       </div>
       <div className="my-card-author"><small>@{post.name}</small></div>
       <div className="my-card-content">{post.content}</div>
@@ -27,6 +35,8 @@ PostListItem.propTypes = {
     content: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    image: PropTypes.string,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
