@@ -31,11 +31,6 @@ const PostListPage = ({ showAddPost }) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12 d-flex align-items-center">
-        </div>
-      </div>
-      <hr />
-      <div className="row">
         <div className="col-6">
           <PostCreateWidget addPost={handleAddPost} showAddPost={showAddPost} />
         </div>

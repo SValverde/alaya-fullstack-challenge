@@ -81,9 +81,9 @@ const PostCreateWidget = ({ addPost }) => {
 
   return (
     <div className={`${classes.root} widget-root d-flex flex-column mb-4 w-100`}>
-      <h3 className="mb-3">What's up?</h3>
+      <h3 className="mt-2 mb-3">What's up?</h3>
 
-      <div className="d-flex flex-column mt-2">
+      <div className="d-flex flex-column">
         <TextField variant="outlined" label="Author name" name="name" value={state.name} onChange={handleChange} />
         <TextField variant="outlined" label="Post title" name="title" value={state.title} onChange={handleChange} />
         <TextField variant="outlined" multiline rows="4" label="Post content" value={state.content} name="content" onChange={handleChange} />

@@ -38,10 +38,20 @@ export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
   for ( var key in jsonBody ) {
     if(jsonBody[key]) formData.append(key, jsonBody[key]);
   }
-  return fetch(`${API_URL}/${endpoint}`, {
+
+  let headers = {
     method,
     body: formData
-  })
+  }
+
+  const jwtToken = localStorage.getItem(JWT_TOKEN);
+
+  if(jwtToken) {
+    headers.headers = {};
+    headers.headers.Authorization = `Bearer ${jwtToken}`;
+  }
+
+  return fetch(`${API_URL}/${endpoint}`, headers)
   .then(response => response.json().then(json => ({ json, response })))
   .then(({ json, response }) => {
     if (!response.ok) {

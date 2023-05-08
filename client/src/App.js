@@ -29,7 +29,7 @@ function App(props) {
                     {/* PersistGate after implementing redux-persist */}
                     {/* <PersistGate loading={null} persistor={persistor}> */}
                     <Navbar />
-                    <div className="w-100 pt-5">
+                    <div className="w-100 mt-5 pt-5 ">
                         <BrowserRouter>
                             <Switch>
                                 <Route path="/" exact component={PostListPage} />

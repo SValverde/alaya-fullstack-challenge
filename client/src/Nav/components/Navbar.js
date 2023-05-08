@@ -36,7 +36,7 @@ function Navbar() {
             return (
                 <>
                     <Typography className="text-white mr-4" variant="h6" >{userEmail}</Typography>
-                    <Button onClick={() => dispatch(userLogout())} variant="outlined">Log out</Button>
+                    <Button onClick={() => dispatch(userLogout())} variant="contained">Log out</Button>
                 </>
             )
         }
