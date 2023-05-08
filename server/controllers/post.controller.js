@@ -71,17 +71,17 @@ getPost = async (req, res) => {
  * @returns void
  */
 // TODO delete img from cloudinary if the post has an imageUrl
-deletePost = async (req, res) => {
+deletePost = async (req, res, next) => {
   Post.findOne({ cuid: req.params.cuid}).exec((err, post) => {
 
     if (err) {
       res.status(500).send(err);
     }
     else if(!post){
-      res.status(404).send('Not found');
+      res.status(404).send({message: "Not ound"});
     }
     else if(post.author != req.user._id){
-      res.status(401).send('Unauthorized');
+      res.status(403).send({message: "Forbidden"});
     }
     else{
       post.remove(() => {

@@ -9,6 +9,7 @@ const apiPort = 3000;
 const db = require('./db');
 const postsRoutes = require('./routes/post.routes');
 const authRoutes = require('./routes/auth.routes');
+const errorHandler = require('./middlewares/errorHandler');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -21,6 +22,8 @@ app.use(passport.initialize());
 const apiRoute = '/api';
 app.use(apiRoute, postsRoutes);
 app.use(apiRoute, authRoutes);
+
+app.use(errorHandler);
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
