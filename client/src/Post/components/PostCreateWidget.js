@@ -78,7 +78,7 @@ const PostCreateWidget = ({ addPost }) => {
           <img width="26" src={imageIcon} />
           <small className="ml-2">Attach file</small>
         </label>
-        <input id="post-image-file-select" className="d-none" type="file" name="image" onChange={handleFile}></input>
+        <input id="post-image-file-select" accept="image/*" className="d-none" type="file" name="image" onChange={handleFile}></input>
         {state.image 
           &&
           <small><span onClick={clearFile} className="remove-file"><img src={trashIcon} height="14" /></span>{state.image.name}</small>
