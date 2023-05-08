@@ -23,7 +23,6 @@ export default async (endpoint, method = 'get', body) => {
 }
 
 export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
-  console.log("Jsonbody:",jsonBody);
   const formData = new FormData();
   for ( var key in jsonBody ) {
     if(jsonBody[key]) formData.append(key, jsonBody[key]);
@@ -38,7 +37,6 @@ export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
       return Promise.reject(json);
     }
 
-    console.log("Json response:",json);
     return json;
   })
   .then(
