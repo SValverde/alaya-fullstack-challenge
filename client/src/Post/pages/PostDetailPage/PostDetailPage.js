@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import './PostDetailPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 // Import Actions
 import { fetchPost } from '../../PostActions';
 // Import Selectors
 import { useParams } from 'react-router-dom';
+import PostListItem from '../../components/PostListItem';
 
 export function PostDetailPage() {
 
@@ -18,15 +20,13 @@ export function PostDetailPage() {
 
   return (post
     ?
-      (<div className="container">
-        <div className="row">
-          <div className="col-12">
-            <h1>{post.title}</h1>
-            <p>By {post.name}</p>
-            <p>{post.content}</p>
+      (<div id="postDetail" className="container">
+            <PostListItem
+              post={post}
+              key={post.cuid}
+            />
           </div>
-        </div>
-      </div>)
+      )
     : (<div>Loading</div>)
   );
 }

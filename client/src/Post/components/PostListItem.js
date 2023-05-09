@@ -12,9 +12,10 @@ function PostListItem({ post, onDelete }) {
   return (
     <div className="my-card">
       <div className="d-flex justify-content-between">
-        <h4 className="my-card-title mr-3">{post.title}</h4>
+        <h4 className="my-card-title mr-3"><a href={`/posts/${post.cuid}/${post.slug}`}>{post.title}</a></h4>
         {
-          userId == post.author &&
+          // TODO add delete function to post detail
+          userId == post.author && onDelete &&
           <div className="post-delete" onClick={onDelete}><img width="20" src={trashIcon}></img></div>
         }
       </div>

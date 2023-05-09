@@ -9,9 +9,14 @@
     cursor: pointer;
 }
 
-.my-card .my-card-title{
-    color: rgba(48, 82, 82, 1);
+.my-card .my-card-title {
     margin-bottom: 0
+}
+.my-card .my-card-title a{
+    color: rgba(48, 82, 82, 1);
+}
+.my-card .my-card-title a:hover{
+    text-decoration-color: rgba(48, 82, 82, 1);
 }
 
 .my-card .my-card-author{
@@ -25,9 +30,11 @@
 .my-card .my-card-image{
     margin-top: 1em;
     max-height: 280px;
+    display: flex;
 }
 
 .my-card .my-card-image img{
+    max-height: 100%;
     border-radius: 3px;
     max-width: 100%;
     object-fit: cover;
