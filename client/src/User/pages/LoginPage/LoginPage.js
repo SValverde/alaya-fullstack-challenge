@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) =>
       padding: '6px 16px',
       borderRadius: '4px',
       fontSize: '0.875rem',
-      backgroundColor: '#EDF7ED',
+      backgroundColor: '#FFF5F5',
       color: 'rgb(30, 70, 32)',
     }
   })
@@ -38,6 +38,7 @@ const Login = () => {
     password: '',
   });
   const [formErrors, setFormErrors] = useState({});
+  const [showAlert, setAlert] = useState(false)
   
   const history = useHistory();
   const dispatch = useDispatch();
@@ -54,10 +55,14 @@ const Login = () => {
     event.preventDefault();
     const errors = validateForm();
     setFormErrors(errors);
+    setAlert(false)
     if (Object.keys(errors).length === 0) {
       dispatch(userLogin(formData)).then(res => {
         setFormData({email: '', password: ''});
         history.push('/')
+      })
+      .catch(err=>{
+        setAlert(true)
       });
     } else {
       console.log("Errors in the form:", errors);
@@ -79,7 +84,7 @@ const Login = () => {
   };
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Grid item xs={12} sm={8} md={6} xl={3}>
         <Typography variant="h4" align="center">
           Login
@@ -123,6 +128,10 @@ const Login = () => {
             Log in
           </Button>
         </form>
+        {
+          showAlert &&
+          <div className={classes.alert}>Error logging in. Please, try again.</div>
+        }
       </Grid>
     </Grid>
   );
