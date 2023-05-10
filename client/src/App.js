@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import './App.css';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import PostListPage from './Post/pages/PostListPage/PostListPage';
@@ -12,7 +12,7 @@ import Navbar from './Nav/components/Navbar';
 import SignUp from './User/pages/SignupPage/SignupPage';
 import Login from './User/pages/LoginPage/LoginPage';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             // main: '#1ecde2',
