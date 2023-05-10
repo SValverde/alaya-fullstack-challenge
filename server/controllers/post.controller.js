@@ -85,7 +85,7 @@ deletePost = async (req, res, next) => {
     }
     else{
       post.remove(() => {
-        res.status(200).end();
+        res.status(200).json({message: 'ok'});
       });
     }
 
