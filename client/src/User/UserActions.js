@@ -40,11 +40,11 @@ export function userLogin(user) {
         saveToken(res.token);
         return dispatch(setUser(res))
       }else{
-        console.log(res);
+        return Promise.reject(res);
       }
     })
     .catch(err =>{
-      console.log("err:",err);
+      return Promise.reject(err);
     });
   }
 }

@@ -27,10 +27,6 @@ export default async (endpoint, method = 'get', body) => {
 
     return json;
   })
-  .then(
-    response => response,
-    error => error
-  );
 }
 
 export const multiPartCall  = (endpoint, method='post', jsonBody) =>{
